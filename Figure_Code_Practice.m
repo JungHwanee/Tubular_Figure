@@ -43,3 +43,7 @@ contour(x, y, z)
 
 % Add a color bar to show the values of the contour lines
 colorbar
+
+%% to do list
+% CCCV rate (C), SOC (15~100%), Maximum Temperature (oC), Charging Time(min), Li Plating Potential(V), (Tubular Radius 2mm Fix)...
+% Save Mat file and transfer to txt File
