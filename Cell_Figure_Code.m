@@ -17,4 +17,18 @@ Roff = 0; % correction factor
 
 % load cell model 
 load(origin_fullpath) % assume variable name 'data_accum'
- 
+
+% CCCV(Crate) vector
+Crate_column = cell2mat(data_accum.Crate); % the table column is in 'cell'. convert cell to matrix (double).
+Crate_unique = unique(Crate_column);
+
+% Inner Diameter vector
+Diameter_column = cell2mat(data_accum.Diameter);
+Diameter_unique = unique(Diameter_column);
+
+% Charging Time vector
+Time_column = cell2mat(data_accum.Time);
+
+% SOC vector
+SOC_column = cell2mat(data_accum.SOC);
+
