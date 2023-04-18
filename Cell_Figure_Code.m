@@ -10,9 +10,6 @@ clear;clc;close all
 % .mat (struct) fullpath
 origin_fullpath ='D:\Leejh\1. KENTECH\1. Modeling\COMSOL+MATLAB\Matlab\LJH\Final\Final\Cell_Result_v2.mat';
 
-% parameters
-A = 1; % scaling factor
-Roff = 0; % correction factor
 
 %% Engine
 
@@ -39,13 +36,36 @@ for i = 1:length(Crate_unique)
         % length of the i, j - vector
         L_ij = size(data_accum.SOC{(i-1)*length(Diameter_unique)+j});
              
- 
         Charging_Time = [Charging_Time;...
-                    Crate_unique(i)*ones(L_ij), Diameter_unique(j)*ones(L_ij), SOC_vec_ij, Charging_Time_vec_ij];
+                    Diameter_unique(j)*ones(L_ij), Crate_unique(i)*ones(L_ij), Charging_Time_vec_ij, SOC_vec_ij];
         
-        Selected_data = Charging_Time(Charging_Time(:,3) > 1, :);
-        Final_data = Selected_data(Selected_data(:,3) < 1.0010, :);
-
+        Selected_data = Charging_Time(Charging_Time(:,4) > 1, :);
+        Final_data = Selected_data(Selected_data(:,4) < 1.0010, :);
+        
+        Final_data(:,4) = [];
     end
 end
+
+        my_struct = struct('Diameter', Final_data(:,1), 'C_rate', Final_data(:,2), 'Time', Final_data(:,3));
+        
+        x = Final_data(:, 1);
+        y = Final_data(:, 2);
+        z = Final_data(:, 3);
+
+%% Plot & Figure
+
+
+figure;
+contourf(x, y, z);
+
+colorbar
+caxis([20 100])
+xlim([1 8])
+ylim([1 12])
+zlim([0 100])
+
+%%
+
+
+
 
